@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joel Ingles - Portfolio</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+          --clr-primary: #4e8fed;
+          --clr-primary-light: #7fa7f2;
+          --clr-bg-main: #121212;
+          --clr-bg-card: #282828;
+          --clr-border: #3f3f3f;
+          --clr-text-main: #EAEAEA;
+          --clr-text-headers: #ffffff;
+
+          --main-font: 'Inter', sans-serif;
+          --header-font: 'Inter', sans-serif;
+          --border-radius-main: 4px;
+          --transition-fast: all 0.2s ease-in-out;
+        }
+
+        *, *::before, *::after {
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
+        }
+
+        html {
+          scroll-behavior: smooth;
+        }
+
+        body {
+          font-family: var(--main-font);
+          background-color: var(--clr-bg-main);
+          color: var(--clr-text-main);
+          line-height: 1.7;
+        }
+
+        a {
+          color: inherit;
+          text-decoration: none;
+        }
+
+        ul {
+          list-style: none;
+        }
+
+        img {
+          max-width: 100%;
+          display: block;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+          color: var(--clr-text-headers);
+          font-family: var(--header-font);
+          font-weight: 700;
+          line-height: 1.2;
+        }
+
+        .wrapper {
+          width: 90%;
+          max-width: 1120px;
+          margin-inline: auto;
+          padding-inline: 1.5rem;
+        }
+
+        .site-header {
+          background-color: var(--clr-bg-main);
+          border-bottom: 1px solid var(--clr-border);
+          position: sticky;
+          top: 0;
+          z-index: 50;
+        }
+
+        .nav {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          height: 4.5rem;
+        }
+
+        .nav-logo {
+          font-size: 1.5rem;
+          font-weight: 700;
+          color: var(--clr-text-headers);
+        }
+
+        .nav-list {
+          display: flex;
+          align-items: center;
+          gap: 2rem;
+        }
+
+        .nav-link {
+          position: relative;
+          transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+          color: var(--clr-primary);
+        }
+        .nav-link::after {
+          content: '';
+          position: absolute;
+          width: 100%;
+          transform: scaleX(0);
+          height: 2px;
+          bottom: -4px;
+          left: 0;
+          background-color: var(--clr-primary);
+          transform-origin: bottom right;
+          transition: transform 0.25s ease-out;
+        }
+        .nav-link:hover::after {
+          transform: scaleX(1);
+          transform-origin: bottom left;
+        }
+
+        main {
+          padding-block: 3rem;
+        }
+
+        section {
+          margin-bottom: 5rem;
+        }
+
+        .hero {
+          text-align: center;
+        }
+
+        .section-title {
+          font-size: 1.875rem;
+          text-align: center;
+          margin-bottom: 3rem;
+        }
+
+        .hero-title {
+            margin-bottom: 1rem;
+        }
+
+        .hero-subtitle {
+            max-width: 48rem;
+            margin-inline: auto;
+        }
+
+        .projects-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 2.5rem;
+        }
+
+        .project-card {
+          background-color: var(--clr-bg-card);
+          border: 1px solid var(--clr-border);
+          border-radius: var(--border-radius-main);
+          overflow: hidden;
+          transition: var(--transition-fast);
+          display: flex;
+          flex-direction: column;
+        }
+
+        .project-card:hover {
+          transform: scale(1.02);
+          border-color: var(--clr-primary);
+        }
+
+        .project-content {
+          padding: 1.5rem;
+          flex-grow: 1;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .project-description {
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+
+        .project-title {
+          font-size: 1.5rem;
+          font-weight: 600;
+          margin-bottom: 0.5rem;
+        }
+
+        .project-tags {
+            margin-bottom: 1rem;
+        }
+
+        .tag {
+          display: inline-block;
+          font-size: 0.875rem;
+          font-weight: 500;
+          margin-right: 0.5rem;
+          margin-bottom: 0.5rem;
+          padding: 0.25rem 0.75rem;
+          border-radius: var(--border-radius-main);
+          background-color: rgba(78, 143, 237, 0.1);
+          border: 1px solid var(--clr-border);
+          color: var(--clr-primary-light);
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: auto;
+        }
+
+
+        .btn {
+          display: inline-block;
+          font-weight: 700;
+          padding: 0.75rem 1.5rem;
+          border-radius: var(--border-radius-main);
+          transition: var(--transition-fast);
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          text-align: center;
+          width: 100%;
+          border: 2px solid transparent;
+        }
+
+        .btn--solid {
+          background-color: var(--clr-primary);
+          color: var(--clr-text-headers);
+          border-color: var(--clr-primary);
+        }
+        .btn--solid:hover {
+          background-color: var(--clr-primary-light);
+          border-color: var(--clr-primary-light);
+        }
+
+        .btn--ghost {
+          background-color: transparent;
+          color: var(--clr-primary-light);
+          border: 2px solid var(--clr-border);
+        }
+        .btn--ghost:hover {
+          background-color: var(--clr-primary);
+          color: var(--clr-text-headers);
+          border-color: var(--clr-primary);
+        }
+
+        .skills-container {
+            max-width: 56rem;
+            margin: auto;
+            text-align: center;
+        }
+
+        .skill-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-weight: 500;
+            background-color: var(--clr-bg-card);
+            color: var(--clr-text-main);
+            border: 1px solid var(--clr-border);
+            transition: var(--transition-fast);
+            margin: 0.25rem;
+        }
+
+        .skill-badge:hover {
+            transform: translateY(-2px);
+            color: var(--clr-primary);
+        }
+
+        .contact {
+            text-align: center;
+        }
+        .contact-text {
+            max-width: 42rem;
+            margin: auto;
+            margin-bottom: 2rem;
+        }
+        .contact-btn {
+            width: auto;
+        }
+
+        .site-footer {
+          border-top: 1px solid var(--clr-border);
+          margin-top: 5rem;
+          padding-block: 2rem;
+          text-align: center;
+          font-size: 0.9rem;
+          color: #8b8b8b;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .footer-link:hover {
+            color: var(--clr-primary);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            position: relative;
+            margin: auto;
+            padding: 0;
+            width: 90%;
+            max-width: 800px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .close-button {
+            position: absolute;
+            top: -30px;
+            right: -10px;
+            color: #fff;
+            font-size: 35px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        @media (max-width: 767px) {
+          .nav-list {
+            display: none;
+          }
+        }
+
+        @media (min-width: 768px) {
+          main {
+            padding-block: 5rem;
+          }
+          section {
+            margin-bottom: 8rem;
+          }
+          .hero-title {
+            font-size: clamp(2.5rem, 5vw + 1rem, 4.5rem);
+          }
+          .hero-subtitle {
+            font-size: 1.25rem;
+          }
+          .section-title {
+            font-size: 2.25rem;
+          }
+          .projects-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="home" class="site-header">
+        <div class="wrapper">
+            <nav class="nav">
+                <a href="#home" class="nav-logo">Joel Ingles</a>
+                <ul class="nav-list">
+                    <li><a href="#projects" class="nav-link">Projects</a></li>
+                    <li><a href="#skills" class="nav-link">Skills</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main wrapper">
+
+        <section class="hero">
+            <h1 class="hero-title">Software Developer</h1>
+            <p class="hero-subtitle">
+                I'm passionate about creating engaging features and turning complex challenges into elegant user experiences. This entire site was built from the ground up to showcase what I can do. You can explore more of my work below.
+            </p>
+        </section>
+
+        <section id="projects">
+            <h2 class="section-title">My Projects</h2>
+            <div class="projects-grid">
+
+                <!--MERN Project -->
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3 class="project-title">Marketplace: A Community E-Commerce Platform</h3>
+                        <p class="project-description">A full-stack e-commerce site built using a MERN stack. Features secure JWT authentication, cloud image uploads, advanced search with geolocation and an integrated messaging system.</p>
+                        <div class="project-tags">
+                            <span class="tag">React</span>
+                            <span class="tag">Node.js</span>
+                            <span class="tag">MongoDB</span>
+                            <span class="tag">JWT</span>
+                            <span class="tag">Cloudinary</span>
+                            <span class="tag"> Tailwind CSS</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/Jingles01/marketplace" class="btn btn--ghost">View Code</a>
+                            <a href="https://marketplace-frontend-09i8.onrender.com" class="btn btn--solid">Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Java Project -->
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3 class="project-title">Inventory Management System</h3>
+                        <p class="project-description">A modern desktop application for managing business inventory. Built using JavaFX and Maven, this app features a clean UI for all CRUD operations and connects to a MySQL database for data persistence.</p>
+                        <div class="project-tags">
+                            <span class="tag">Java</span>
+                            <span class="tag">JavaFX</span>
+                            <span class="tag">MySQL</span>
+                            <span class="tag">Maven</span>
+                        </div>
+                        <div class="project-links">
+                           <a href="https://github.com/Jingles01/InventoryManagementSystem" class="btn btn--ghost">View Code</a>
+                           <button class="btn btn--solid video-demo-btn" data-video-id="5_5dNkJDp24">Video Demo</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- C++ Project -->
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3 class="project-title">TunnelMan: 2D Arcade Game</h3>
+                        <p class="project-description">A 2D arcade game built in C++, demonstrating object-oriented design and data structures. Players must navigate a maze, clear paths, avoid enemies and collect items. The project required managing a dynamic game world, actor inheritance and user input.</p>
+                        <div class="project-tags">
+                            <span class="tag">C++</span>
+                            <span class="tag">Object-Oriented Programming</span>
+                            <span class="tag">Data Structures</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/Jingles01/TunnelMan" class="btn btn--ghost">View Code</a>
+                            <button class="btn btn--solid video-demo-btn" data-video-id="sm63Nyf_KcI">Video Demo</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- React Native Project -->
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3 class="project-title">Vehicle Inventory Manager</h3>
+                        <p class="project-description">A cross-platform mobile app for valet services. Built with React Native and Firebase, it features role-based access for Admins and Valets. The core of the app is a real-time visual parking map for efficient spot selection, streamlined vehicle check-in/out and customer management.</p>
+                        <div class="project-tags">
+                            <span class="tag">React Native</span>
+                            <span class="tag">Firebase</span>
+                            <span class="tag">Expo</span>
+                            <span class="tag">TypeScript</span>
+                            <span class="tag">BaaS</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/Jingles01/CarParkManager" class="btn btn--ghost">View Code</a>
+                            <button class="btn btn--solid video-demo-btn" data-video-id="SrNomDLIKCw">Video Demo</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-container">
+                <span class="skill-badge">C++</span>
+                <span class="skill-badge">Java</span>
+                <span class="skill-badge">JavaScript</span>
+                <span class="skill-badge">TypeScript</span>
+                <span class="skill-badge">SQL</span>
+                <span class="skill-badge">React</span>
+                <span class="skill-badge">React</span>
+                <span class="skill-badge">HTML5 & CSS3</span>
+                <span class="skill-badge">Tailwind CSS</span>
+                <span class="skill-badge">JavaFX</span>
+                <span class="skill-badge">Node.js</span>
+                <span class="skill-badge">Express.js</span>
+                <span class="skill-badge">JWT</span>
+                <span class="skill-badge">React Native</span>
+                <span class="skill-badge">Expo</span>
+                <span class="skill-badge">Spring Boot</span>
+                <span class="skill-badge">MySQL</span>
+                <span class="skill-badge">MongoDB</span>
+                <span class="skill-badge">Firebase</span>
+                <span class="skill-badge">Cloudinary</span>
+                <span class="skill-badge">BaaS</span>
+                <span class="skill-badge">Git & GitHub</span>
+                <span class="skill-badge">Maven</span>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <h2 class="section-title">Get In Touch</h2>
+            <p class="contact-text">I'm currently open to new opportunities. Feel free to reach out if you have a question or just want to connect!</p>
+            <a href="mailto:joelinglesji@gmail.com" class="btn btn--solid contact-btn">
+                Say Hello
+            </a>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrapper">
+            <div class="footer-links">
+                <a href="https://github.com/Jingles01" class="footer-link">GitHub</a>
+                <a href="https://www.linkedin.com/in/joel-ingles/" class="footer-link">LinkedIn</a>
+            </div>
+            <p>&copy; 2025 Joel Ingles. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <div class="video-container">
+                <iframe id="videoPlayer" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById('videoModal');
+            const videoPlayer = document.getElementById('videoPlayer');
+            const closeButton = document.querySelector('.close-button');
+            const demoButtons = document.querySelectorAll('.video-demo-btn');
+
+            const openModal = (videoId) => {
+                videoPlayer.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+                modal.style.display = 'flex';
+                document.body.classList.add('modal-open');
+            };
+
+            const closeModal = () => {
+                modal.style.display = 'none';
+                videoPlayer.src = '';
+                document.body.classList.remove('modal-open');
+            };
+            demoButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const videoId = button.getAttribute('data-video-id');
+                    openModal(videoId);
+                });
+            });
+            closeButton.addEventListener('click', closeModal);
+
+            window.addEventListener('click', (event) => {
+                if (event.target === modal) {
+                    closeModal();
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
